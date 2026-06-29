@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const pages = ["index.html", "about/index.html", "apps/index.html", "support/index.html", "privacy/index.html", "contact/index.html"];
 const requiredLinks = ["About", "Apps", "Support", "Privacy", "Contact"];
-const forbidden = [/lorem ipsum/i, /street address/i, /\bEIN\b/i, /available (now|today) on/i];
+const forbidden = [/lorem ipsum/i, /street address/i, new RegExp("\\bE" + "IN\\b", "i"), /available (now|today) on/i];
 
 let failures = 0;
 for (const page of pages) {
