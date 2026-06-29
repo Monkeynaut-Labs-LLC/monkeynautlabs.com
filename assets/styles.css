@@ -259,6 +259,60 @@ ol {
   transform: translate(-48%, -50%);
 }
 
+.brand-art-test {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(340px, 1.12fr);
+  gap: clamp(2rem, 6vw, 5.5rem);
+  align-items: center;
+}
+
+.brand-art-test-copy {
+  max-width: 620px;
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.brand-art-test h2 {
+  font-size: clamp(2.4rem, 4.7vw, 5.2rem);
+}
+
+.brand-art-test p:not(.eyebrow) {
+  margin-top: 1.4rem;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+}
+
+.brand-art-test-figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgb(71 96 111 / 55%);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgb(3 13 25 / 95%), rgb(8 24 38 / 72%));
+  box-shadow: 0 28px 80px rgb(0 0 0 / 28%);
+}
+
+.brand-art-test-figure::before {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 65% 22%, rgb(53 200 244 / 16%), transparent 42%);
+  content: "";
+}
+
+.brand-art-test-figure img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .section {
   padding-block: var(--section);
   border-top: 1px solid var(--line);
@@ -651,6 +705,7 @@ ol {
   }
 
   .section-heading,
+  .brand-art-test,
   .status-band,
   .page-hero,
   .content-grid,
@@ -670,6 +725,10 @@ ol {
 
   .status-link {
     justify-self: start;
+  }
+
+  .brand-art-test {
+    grid-template-columns: 1fr;
   }
 
   .policy-nav {
