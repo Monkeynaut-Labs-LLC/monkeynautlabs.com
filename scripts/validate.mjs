@@ -5,7 +5,16 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const pages = ["index.html", "about/index.html", "apps/index.html", "support/index.html", "privacy/index.html", "contact/index.html"];
 const requiredLinks = ["About", "Apps", "Support", "Privacy", "Contact"];
-const forbidden = [/lorem ipsum/i, /street address/i, new RegExp("\\bE" + "IN\\b", "i"), /available (now|today) on/i];
+const forbidden = [
+  /lorem ipsum/i,
+  /street address/i,
+  new RegExp("\\bE" + "IN\\b", "i"),
+  /available (now|today) on/i,
+  /outlook\.com/i,
+  /once active/i,
+  /temporary fallback/i,
+  /\bintended\b/i,
+];
 
 let failures = 0;
 for (const page of pages) {
@@ -32,16 +41,18 @@ for (const page of pages) {
     console.error(`${page}: scripts are not expected in this static site`);
     failures++;
   }
-  const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
-  for (const href of hrefs) {
-    if (/^(https?:|mailto:|#)/.test(href)) continue;
-    const clean = href.split("#")[0].split("?")[0];
+  const references = [
+    ...html.matchAll(/(?:href|src)="([^"]+)"/g),
+  ].map((match) => match[1]);
+  for (const reference of references) {
+    if (/^(https?:|mailto:|#|data:)/.test(reference)) continue;
+    const clean = reference.split("#")[0].split("?")[0];
     if (!clean) continue;
     const target = clean.endsWith("/") ? `${clean}index.html` : clean;
     try {
       await access(resolve(dirname(path), target));
     } catch {
-      console.error(`${page}: broken local link ${href}`);
+      console.error(`${page}: broken local reference ${reference}`);
       failures++;
     }
   }
