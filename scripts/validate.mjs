@@ -3,7 +3,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const pages = ["index.html", "about/index.html", "apps/index.html", "support/index.html", "privacy/index.html", "contact/index.html"];
+const pages = ["index.html", "about/index.html", "apps/index.html", "support/index.html", "privacy/index.html", "contact/index.html", "closet-crafter/privacy/index.html", "closet-crafter/terms/index.html"];
 const requiredLinks = ["About", "Apps", "Support", "Privacy", "Contact"];
 const forbidden = [
   /lorem ipsum/i,
